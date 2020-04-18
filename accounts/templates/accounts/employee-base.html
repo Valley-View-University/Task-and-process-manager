@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Company dashbord for PywE">
+  <meta name="author" content="PywE">
+  <title>{{title}}</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/static/images/logo.png" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <link rel="stylesheet" href="/static/css/animate.css" type="text/css" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="/static/argon/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="/static/argon/vendor/animate.css/animate.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/argon/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="/static/argon/css/argon.css?v=1.0.0" type="text/css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+  <!-- Sidenav -->
+  <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner">
+      <!-- Brand -->
+      <div class="sidenav-header d-flex align-items-center">
+        <a class="navbar-brand" href="/">
+            {% if user.user_img %}
+          <img src="{{user.user_img.url}}" class="navbar-brand-img" alt="company_logo">
+          {% else %}
+          <img src="/static/images/logo.png" class="navbar-brand-img" alt="company_logo">
+          {% endif %}
+        </a>
+        <div class="ml-auto">
+          <!-- Sidenav toggler -->
+          <div class="sidenav-toggler d-none d-xl-block" data-action="sidenav-unpin" data-target="#sidenav-main">
+            <div class="sidenav-toggler-inner">
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-inner">
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+          <!-- Nav items -->
+          <ul class="navbar-nav">
+            {% for link in links %}
+            <li class="nav-item">
+              <!-- You can add active here after the nav-link -->
+              <a class="nav-link" href="#{{link.link}}" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="{{link.link}}">
+                <i class="ni ni-{{link.icon}} text-{{link.color}}"></i>
+                <span class="nav-link-text">{{link.name}}</span>
+              </a>
+              {% if link.dropdown %}
+              <div class="collapse hide" id="{{link.link}}">
+
+                <ul class="nav nav-sm flex-column">
+                    {% for each in link.dropdowns %}
+                  <li class="nav-item">
+                    <a href="{{each.link}}" class="nav-link">
+                        <i class="ni ni-{{each.icon}} text-primary"></i>
+                        {{each.name}}
+                    </a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+              {% endif %}
+
+
+            </li>
+
+            {%  endfor %}
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  {% block content %}
+  {% endblock content %}
+   <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="/static/argon/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="/static/argon/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/argon/vendor/js-cookie/js.cookie.js"></script>
+  <script src="/static/argon/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="/static/argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <script src="/static/argon/vendor/lavalamp/js/jquery.lavalamp.min.js"></script>
+  <!-- Optional JS -->
+  <script src="/static/argon/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="/static/argon/vendor/chart.js/dist/Chart.extension.js"></script>
+  <script src="/static/argon/vendor/select2/dist/js/select2.min.js"></script>
+  <script src="/static/argon/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+  <script src="/static/argon/vendor/nouislider/distribute/nouislider.min.js"></script>
+  <script src="/static/argon/vendor/quill/dist/quill.min.js"></script>
+  <script src="/static/argon/vendor/dropzone/dist/min/dropzone.min.js"></script>
+  <script src="/static/argon/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+  <script src="/static/argon/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="/static/argon/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="/static/argon/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/static/argon/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+  <script src="/static/argon/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="/static/argon/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="/static/argon/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="/static/argon/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+  <script src="/static/argon/vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+  <!--<script type="text/javascript" src="/static/admin/jsi18n/"></script>-->
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+  <!-- Argon JS -->
+  <script src="/static/argon/js/argon.js?v=1.0.0"></script>
+  <!-- Demo JS - remove this in your project -->
+  <!--<script src="/static/argon/js/demo.min.js"></script>-->
+
+  <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
+  
+
+</body>
+
+</html>
