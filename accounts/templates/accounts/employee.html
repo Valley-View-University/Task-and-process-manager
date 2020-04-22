@@ -39,90 +39,6 @@
             <!--    <i class="ni ni-zoom-split-in"></i>-->
             <!--  </a>-->
             <!--</li>-->
-            <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-bell-55"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right py-0 overflow-hidden">
-                <!-- Dropdown header -->
-                <div class="px-3 py-3">
-                  <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">{{no_of_msgs}}</strong> new messages</h6>
-                </div>
-                <!-- List group -->
-                <div class="list-group list-group-flush">
-                  <a href="/interact" target="_" class="list-group-item list-group-item-action">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        {% if user.user_img %}
-                        <img alt="Image placeholder" src="{{user.user_img.url}}" class="avatar rounded-circle">
-                         {% else %}
-                          <img alt="Image placeholder" src="/static/images/logo.png" class="avatar rounded-circle">
-                          {% endif %}
-                      </div>
-                      <div class="col ml--2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h4 class="mb-0 text-sm">{{last_msg.from_user.username}}</h4>
-                          </div>
-                          <div class="text-right text-muted">
-                            <small>{{last_msg.date_sent}}</small>
-                          </div>
-                        </div>
-                        <p class="text-sm mb-0">{{last_msg.content}}</p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <!-- View all -->
-                <a href="/interact" target="_" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-ungroup"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default dropdown-menu-right">
-                <div class="row shortcuts px-4">
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-red">
-                      <i class="ni ni-calendar-grid-58"></i>
-                    </span>
-                    <small>Calendar</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
-                      <i class="ni ni-email-83"></i>
-                    </span>
-                    <small>Email</small>
-                  </a>
-                  <!--<a href="#!" class="col-4 shortcut-item">-->
-                  <!--  <span class="shortcut-media avatar rounded-circle bg-gradient-info">-->
-                  <!--    <i class="ni ni-credit-card"></i>-->
-                  <!--  </span>-->
-                  <!--  <small>Payments</small>-->
-                  <!--</a>-->
-                  <!--<a href="#!" class="col-4 shortcut-item">-->
-                  <!--  <span class="shortcut-media avatar rounded-circle bg-gradient-green">-->
-                  <!--    <i class="ni ni-books"></i>-->
-                  <!--  </span>-->
-                  <!--  <small>Reports</small>-->
-                  <!--</a>-->
-                  <!--<a href="#!" class="col-4 shortcut-item">-->
-                  <!--  <span class="shortcut-media avatar rounded-circle bg-gradient-purple">-->
-                  <!--    <i class="ni ni-pin-3"></i>-->
-                  <!--  </span>-->
-                  <!--  <small>Maps</small>-->
-                  <!--</a>-->
-                  <!--<a href="#!" class="col-4 shortcut-item">-->
-                  <!--  <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">-->
-                  <!--    <i class="ni ni-basket"></i>-->
-                  <!--  </span>-->
-                  <!--  <small>Shop</small>-->
-                  <!--</a>-->
-                </div>
-              </div>
-            </li>
           </ul>
           <ul class="navbar-nav align-items-center ml-auto ml-md-0">
             <li class="nav-item dropdown">
@@ -148,18 +64,7 @@
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>
-                <a href="/admin" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
-                </a>
-                <a href="/courses" class="dropdown-item">
-                  <i class="ni ni-calendar-grid-58"></i>
-                  <span>Activity</span>
-                </a>
-                <a href="/" class="dropdown-item">
-                  <i class="ni ni-support-16"></i>
-                  <span>Support</span>
-                </a>
+               
                 <div class="dropdown-divider"></div>
                 <a href="/accounts/logout/" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
@@ -211,10 +116,14 @@
                   <h5 class="card-title text-uppercase text-muted mb-0 text-white">{{user.username}}</h5>
                   <!--<span class="h2 font-weight-bold mb-0 text-white">{{robot_traffic}}</span>-->
                   <!--<h6 class="text-uppercase text-muted mb-0 text-white">Available Credit</h6>-->
-                  <span class="text-muted mb-0 text-white">Completed:21</span>
-                  <div class="progress progress-xs mt-3 mb-0">
+                  {% if user.is_superadmin %}
+                  <span class="text-muted mb-0 text-white">Super Admin</span>
+                  {% else %}
+                  <span class="text-muted mb-0 text-white">Staff</span>
+                  {% endif %}
+                  <!-- <div class="progress progress-xs mt-3 mb-0">
                     <div class="progress-bar bg-success" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:100%;"></div>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="col-auto">
                   <button type="button" class="btn btn-sm btn-neutral mr-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -270,12 +179,12 @@
         {% for ergent,perc in ergents %}
           <!--First card-->
         <div class="col-xl-12 col-md-12">
-          <div class="card bg-darker border-0">
+          <div class="card bg-white border-0">
              <!--Card body-->
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0 text-white">{{ergent.title}}</h5>
+                  <h5 class="card-title text-uppercase text-muted mb-0 text-black">{{ergent.title}}</h5>
                   <!--<span class="h2 font-weight-bold mb-0 text-white">{{robot_traffic}}</span>-->
                   <!--<h6 class="text-uppercase text-muted mb-0 text-white">Available Credit</h6>-->
                   
@@ -302,12 +211,12 @@
                 <!-- This part will loop through all the sub tasks of this particular task -->
                 {% for task in ergent.tasks.all %}
                 <div class="col-md-12 col-lg-4">
-                  <h5 class="card-title text-muted mb-0 text-white">{{task.description}}</h5>
+                  <h5 class="card-title text-muted mb-0 text-dark">{{task.description}}</h5>
                   <!--<span class="h2 font-weight-bold mb-0 text-white">{{robot_traffic}}</span>-->
                   <!--<h6 class="text-uppercase text-muted mb-0 text-white">Available Credit</h6>-->
-                  <span class="text-white" style="font-size:12px;">Start Date: {{task.start_date}}</span>
+                  <span class="text-dark" style="font-size:12px;">Start Date: {{task.start_date}}</span>
                   <br/>
-                  <span class="text-white" style="font-size:12px;">Deadline: {{task.end_date}}</span>
+                  <span class="text-dark" style="font-size:12px;">Deadline: {{task.end_date}}</span>
                     {% if task.help_text %}
                     <span style="float:right;">
                         <button title="Get Help for task" onclick="fillHelp('{{task.help_text}}')" class="btn btn-sm btn-icon btn-neutral" type="button" data-toggle="modal" data-target="#helpModal">
@@ -479,57 +388,7 @@
 
      
 <!-- To Do List -->
-      <div class="card-deck flex-column flex-xl-row">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="h3 mb-0">To do list</h5>
-            <div class="text-right">
-            <button class="btn btn-icon btn-primary" type="button" data-toggle="modal" data-target="#todoModal">
-	            <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-            </button>
-            </div>
-          </div>
 
-          <div class="card-body p-0">
-
-            <ul class="list-group list-group-flush" data-toggle="checklist">
-                {% for item in todo_list %}
-              <li id="item{{item.id}}" class="checklist-entry list-group-item flex-column align-items-start py-4 px-4">
-                <div class="checklist-item checklist-item-info">
-                  <div class="checklist-info">
-                    <h5 class="checklist-title mb-0">{{item.description}}</h5>
-                    <small>{{item.Date}} {{item.Time}}</small>
-                  </div>
-                  <div>
-                    <div class="custom-control custom-checkbox custom-checkbox-success">
-                        {% if item.status == "done" %}
-                      <input class="custom-control-input" id="chk-todo-task-{{item.id}}" type="checkbox" checked name="item" onchange="change('chk-todo-task-{{item.id}}',{{item.id}});">
-                      {% else %}
-                      <input class="custom-control-input" id="chk-todo-task-{{item.id}}" type="checkbox" name="item" onchange="change('chk-todo-task-{{item.id}}',{{item.id}});">
-                      {% endif %}
-                      <label class="custom-control-label" for="chk-todo-task-{{item.id}}"></label>
-                    </div>
-                    <div onclick="confirm({{item.id}})" style="pointer:hand;color:red;margin-top:20px;"><i class="fas fa-trash"></i></div>
-                  </div>
-                </div>
-              </li>
-              {% empty %}
-              <p class="alert alert-secondary" style="padding:20px;">With Todo List, you can add reminders. PywE will remind you of this reminder through your mail.
-              You can also set reminders on repeat by marking the repeat field. You have the freedom to set
-              daily, weekly or monthly reminders. Why don't you use this feature to keep up with your courses?. Feel free to
-              use this feature as a pure Todo List (meaning no reminders)</p>
-              {% endfor %}
-              </li>
-            </ul>
-          </div>
-
-           <!--<div class="text-right">-->
-           <!-- <button class="btn btn-icon btn-primary" type="button" data-toggle="modal" data-target="#todoModal">-->
-	          <!--  <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>-->
-           <!-- </button>-->
-           <!-- </div>-->
-        </div>
-      </div>
 <!--onclick="location.href='/accounts/utils/add_todo'"-->
                <!--Modal that pops up todo add form-->
 <div id="todoModal"  class="modal fade bd-example-modal-lg">
@@ -702,7 +561,7 @@
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-lg-6">
             <div class="copyright text-center text-lg-left text-muted">
-              &copy; 2019 <a href="/" class="font-weight-bold ml-1" target="_blank">PywE</a>
+              &copy; <script>document.write(new Date().getFullYear())</script> <a href="/" class="font-weight-bold ml-1" target="_blank">Task and Process Manager</a>
             </div>
           </div>
           <div class="col-lg-6">
@@ -722,7 +581,7 @@
   </div>
   {% else %}
   <script>
-  window.location.href = "/accounts/login/?next=accounts/dashboard/";
+  window.location.href = "/admin/login/?next=/";
 </script>
 
   {% endif %}

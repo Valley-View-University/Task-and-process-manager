@@ -36,9 +36,11 @@ links = [
 
 # Create your views here.
 def index(request):
+    args = {}
     if request.user.is_authenticated:
+        args['links']=links
         template_name = "accounts/employee.html"
-        args = {}
+        
         #tasks = Task.objects.filter(assignees__id=request.user.id)#.order_by("-start_date")
         tasks = Task.objects.filter(assigned_by=request.user)
         if tasks:
@@ -52,6 +54,6 @@ def index(request):
                 percs.append(perc)
             mytasks = zip(tasks,percs)
             args['ergents']=mytasks
-            args['links']=links
+            
         return render(request,template_name,args)
     return redirect("/admin/login/?next=/")
